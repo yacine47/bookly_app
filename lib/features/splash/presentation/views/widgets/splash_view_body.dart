@@ -16,7 +16,6 @@ class _SplashViewBodyState extends State<SplashViewBody>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> slidingAnimationLogo;
-
   late Animation<Offset> slidingAnimationText;
 
   @override
