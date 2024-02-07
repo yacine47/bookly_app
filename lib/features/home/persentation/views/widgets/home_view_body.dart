@@ -1,4 +1,3 @@
-import 'package:bookly_app/core/utils/styles.dart';
 import 'package:bookly_app/features/home/persentation/views/widgets/custom_app_bar.dart';
 import 'package:bookly_app/features/home/persentation/views/widgets/featured_books_list_view.dart';
 import 'package:bookly_app/features/home/persentation/views/widgets/title_meduim.dart';
