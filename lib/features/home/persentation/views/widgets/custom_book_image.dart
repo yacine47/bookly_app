@@ -1,3 +1,4 @@
+import 'package:bookly_app/core/utils/styles.dart';
 import 'package:bookly_app/features/home/persentation/views/widgets/custom_book_details_app_bar.dart';
 import 'package:bookly_app/features/home/persentation/views/widgets/featred_book_item.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +11,24 @@ class CustomBookImage extends StatelessWidget {
     return Column(
       children: [
         const CustomBookDetailsAppBar(),
-        const SizedBox(height: 33),
+        const SizedBox(height: 28),
         Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * .28),
+              horizontal: MediaQuery.of(context).size.width * .30),
           child: const FeatredBookItem(),
+        ),
+        const SizedBox(height: 43),
+        const Text(
+          'The Jungle Book',
+          style: Styles.textStyle30,
+        ),
+        const SizedBox(height: 6),
+        Text(
+          'The Jungle Book',
+          style: Styles.textStyle18.copyWith(
+            color: Colors.white.withOpacity(.7),
+            fontStyle: FontStyle.italic,
+          ),
         ),
       ],
     );
