@@ -13,7 +13,7 @@ class BookRating extends StatelessWidget {
         Iconify(
           IconsData.startIcon,
           color: const Color(0xffFFDD4F),
-          size: 13.4,
+          size: 19,
         ),
         const SizedBox(
           width: 6.3,
