@@ -1,4 +1,3 @@
-
 import 'package:bookly_app/core/utils/assets.dart';
 import 'package:bookly_app/features/home/persentation/views/home_view.dart';
 import 'package:bookly_app/features/splash/presentation/views/widgets/custom_sliding_animation.dart';
@@ -59,8 +58,11 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   void navigateToHome() {
     Future.delayed(
-        const Duration(seconds: 3),
-        () => GoRoute(path: HomeView.path));
+      const Duration(seconds: 3),
+      () {
+        GoRouter.of(context).push(HomeView.path);
+      },
+    );
   }
 
   void initSlidingAnimation() {
