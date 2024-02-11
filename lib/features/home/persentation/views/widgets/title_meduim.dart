@@ -7,9 +7,12 @@ class TitleMeduim extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: kPaddingHor),
-      child: Text('Best Seller', style: Styles.titleMedium),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kPaddingHor),
+      child: Text('Best Seller',
+          style: Styles.textStyle18.copyWith(
+            fontWeight: FontWeight.bold,
+          )),
     );
   }
 }
