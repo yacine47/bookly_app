@@ -1,5 +1,7 @@
 import 'package:bookly_app/constants.dart';
 import 'package:bookly_app/core/utils/assets.dart';
+import 'package:bookly_app/core/utils/styles.dart';
+import 'package:bookly_app/features/home/persentation/views/widgets/book_rating.dart';
 import 'package:flutter/material.dart';
 
 class BestSellerListViewItem extends StatelessWidget {
@@ -10,7 +12,7 @@ class BestSellerListViewItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kPaddingHor),
       child: SizedBox(
-        height: 105,
+        height: 114,
         child: Row(
           children: [
             AspectRatio(
@@ -24,8 +26,40 @@ class BestSellerListViewItem extends StatelessWidget {
                         image: AssetImage(AssetsData.testImage),
                       )),
                 )),
-            const Column(
-              children: [],
+            const SizedBox(
+              width: 30,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Harry Potter and the Goblet of Fire ',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Styles.textStyle20.copyWith(
+                      fontFamily: kGtSectraFine,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  const Text(
+                    'J.K. Rowling',
+                    style: Styles.textStyle14,
+                  ),
+                  const SizedBox(height: 3),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '19.99 €',
+                        style: Styles.textStyle20,
+                      ),
+                      BookRating(),
+                    ],
+                  ),
+                ],
+              ),
             )
           ],
         ),

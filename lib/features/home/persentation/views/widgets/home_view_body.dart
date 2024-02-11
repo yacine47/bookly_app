@@ -16,7 +16,7 @@ class HomeViewBody extends StatelessWidget {
         FeatredBooksListView(),
         SizedBox(height: 46),
         TitleMeduim(),
-        SizedBox(height: 12),
+        SizedBox(height: 20),
         BestSellerListViewItem(),
       ],
     );
