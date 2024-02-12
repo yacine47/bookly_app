@@ -1,5 +1,6 @@
 import 'package:bookly_app/features/home/persentation/views/book_details_view.dart';
 import 'package:bookly_app/features/home/persentation/views/home_view.dart';
+import 'package:bookly_app/features/search/presentation/views/search_view.dart';
 import 'package:bookly_app/features/splash/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,6 +18,10 @@ abstract class AppRouter {
       GoRoute(
         path: BookDetailsView.path,
         builder: (context, state) => const BookDetailsView(),
+      ),
+      GoRoute(
+        path: SearchView.path,
+        builder: (context, state) => const SearchView(),
       ),
     ],
   );

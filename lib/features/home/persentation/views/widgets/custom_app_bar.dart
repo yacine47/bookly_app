@@ -1,6 +1,8 @@
 import 'package:bookly_app/core/utils/assets.dart';
 import 'package:bookly_app/core/utils/icons.dart';
+import 'package:bookly_app/features/search/presentation/views/search_view.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -19,7 +21,9 @@ class CustomAppBar extends StatelessWidget {
           ),
           const Spacer(),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).push(SearchView.path);
+              },
               icon: Iconify(
                 IconsData.searchIcon,
                 color: Colors.white,
