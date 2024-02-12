@@ -17,7 +17,6 @@ class BestSellerListView extends StatelessWidget {
   }
 }
 
-
 // ListView.separated(
 //       padding: EdgeInsets.zero,
 //       physics: const NeverScrollableScrollPhysics(),
