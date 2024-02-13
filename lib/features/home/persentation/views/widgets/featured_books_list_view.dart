@@ -29,7 +29,9 @@ class FeatredBooksListView extends StatelessWidget {
         } else if (state is FeatredBooksFailure) {
           return CustomFailureWidget(errMessage: state.errMessage);
         } else {
-          return const CustomLoadingWidget();
+          return SizedBox(
+              height: MediaQuery.of(context).size.height * .265,
+              child: const CustomLoadingWidget());
         }
       },
     );
