@@ -11,7 +11,7 @@ class SimilarBookListView extends StatelessWidget {
       child: ListView.separated(
         padding: const EdgeInsets.only(left: 0),
         scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => const CustomBookImage(),
+        itemBuilder: (context, index) => const CustomBookImage(imageUrl: 'https://ew.com/thmb/rvat6WP-MplFuFNA4xJ-aGKEADc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/9781408855652-png-c57764456b554308ae1398474caab3c2.jpg'),
         separatorBuilder: (context, index) => const SizedBox(width: 12),
         itemCount: 50,
       ),
