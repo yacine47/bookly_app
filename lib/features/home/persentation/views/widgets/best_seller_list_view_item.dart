@@ -24,7 +24,7 @@ class BookItemListView extends StatelessWidget {
           child: Row(
             children: [
               CustomBookImage(
-                  imageUrl: bookModel.volumeInfo.imageLinks.thumbnail),
+                  imageUrl: bookModel.volumeInfo?.imageLinks?.thumbnail ?? ''),
               const SizedBox(
                 width: 30,
               ),
@@ -33,7 +33,7 @@ class BookItemListView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      bookModel.volumeInfo.title!,
+                      bookModel.volumeInfo!.title!,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.textStyle20.copyWith(
@@ -43,7 +43,7 @@ class BookItemListView extends StatelessWidget {
                     ),
                     const SizedBox(height: 3),
                     Text(
-                      bookModel.volumeInfo.authors![0],
+                      bookModel.volumeInfo!.authors![0],
                       style: Styles.textStyle14,
                     ),
                     const SizedBox(height: 3),

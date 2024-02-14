@@ -4,6 +4,7 @@ import 'package:bookly_app/features/home/data/models/book_model/book_model.dart'
 import 'package:bookly_app/features/home/data/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class HomeRepoImpl extends HomeRepo {
   final ApiService apiService;
@@ -18,7 +19,11 @@ class HomeRepoImpl extends HomeRepo {
 
       List<BookModel> books = [];
       for (var item in data['items']) {
-        books.add(BookModel.fromJson(item));
+        try {
+          books.add(BookModel.fromJson(item));
+        } catch (e) {
+          debugPrint(e.toString());
+        }
       }
 
       return right(books);
@@ -36,11 +41,15 @@ class HomeRepoImpl extends HomeRepo {
   Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async {
     try {
       var data = await apiService.get(
-          endPoint: 'volumes?Filtering=free-ebooks&q=subject:programming');
+          endPoint: 'volumes?Filtering=free-ebooks&q=computer science');
 
       List<BookModel> books = [];
       for (var item in data['items']) {
-        books.add(BookModel.fromJson(item));
+        try {
+          books.add(BookModel.fromJson(item));
+        } catch (e) {
+          debugPrint(e.toString());
+        }
       }
 
       return right(books);
