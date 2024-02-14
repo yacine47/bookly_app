@@ -62,4 +62,32 @@ class HomeRepoImpl extends HomeRepo {
       ));
     }
   }
+
+  @override
+  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks(
+      {required String category}) async {
+    try {
+      var data = await apiService.get(
+          endPoint:
+              'volumes?Filtering=free-ebooks&q=subject:programming&Sorting=relevance');
+
+      List<BookModel> books = [];
+      for (var item in data['items']) {
+        try {
+          books.add(BookModel.fromJson(item));
+        } catch (e) {
+          debugPrint(e.toString());
+        }
+      }
+
+      return right(books);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServiceFailure.fromDioError(e));
+      }
+      return left(ServiceFailure(
+        e.toString(),
+      ));
+    }
+  }
 }
