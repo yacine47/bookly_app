@@ -1,4 +1,5 @@
 import 'package:bookly_app/core/utils/assets.dart';
+import 'package:bookly_app/core/widgets/custom_book_image_loading.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -29,6 +30,7 @@ class CustomBookImage extends StatelessWidget {
               ),
             ),
           ),
+          placeholder: (context, url) => const CustomBookImageLoadingListView(),
         ),
       ),
     );

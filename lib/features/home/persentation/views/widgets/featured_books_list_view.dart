@@ -1,10 +1,12 @@
 import 'package:bookly_app/constants.dart';
+import 'package:bookly_app/core/widgets/custom_book_image_loading.dart';
 import 'package:bookly_app/core/widgets/custom_failure_widget.dart';
-import 'package:bookly_app/core/widgets/custom_loading_widget.dart';
 import 'package:bookly_app/features/home/persentation/view_models/featured_books_cubit/featred_books_cubit.dart';
+import 'package:bookly_app/features/home/persentation/views/book_details_view.dart';
 import 'package:bookly_app/features/home/persentation/views/widgets/custom_book_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class FeatredBooksListView extends StatelessWidget {
   const FeatredBooksListView({super.key});
@@ -19,21 +21,30 @@ class FeatredBooksListView extends StatelessWidget {
             child: ListView.separated(
               padding: const EdgeInsets.only(left: kPaddingHor),
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => CustomBookImage(
-                imageUrl:
-                    state.books[index].volumeInfo?.imageLinks?.thumbnail ?? '',
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  GoRouter.of(context)
+                      .push(BookDetailsView.path, extra: state.books[index]);
+                },
+                child: CustomBookImage(
+                  imageUrl:
+                      state.books[index].volumeInfo?.imageLinks?.thumbnail ??
+                          '',
+                ),
               ),
               separatorBuilder: (context, index) => const SizedBox(width: 12),
               itemCount: state.books.length,
             ),
           );
-        } else if (state is FeatredBooksFailure) {
-          return CustomFailureWidget(errMessage: state.errMessage);
-        } else {
-          return SizedBox(
-              height: MediaQuery.of(context).size.height * .265,
-              child: const CustomLoadingWidget());
         }
+        if (state is FeatredBooksFailure) {
+          return CustomFailureWidget(errMessage: state.errMessage);
+        }
+        return SizedBox(
+            height: MediaQuery.of(context).size.height * .265,
+            child: const CustomBookImageLoading(
+              padding: EdgeInsets.only(left: kPaddingHor),
+            ));
       },
     );
   }
