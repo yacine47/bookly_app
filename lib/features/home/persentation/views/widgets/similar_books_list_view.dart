@@ -1,6 +1,5 @@
 import 'package:bookly_app/core/widgets/custom_book_image_loading.dart';
 import 'package:bookly_app/core/widgets/custom_failure_widget.dart';
-import 'package:bookly_app/core/widgets/custom_loading_widget.dart';
 import 'package:bookly_app/features/home/persentation/view_models/similar_books_cubit/similarbooks_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bookly_app/features/home/persentation/views/widgets/custom_book_image.dart';
@@ -20,9 +19,9 @@ class SimilarBookListView extends StatelessWidget {
               padding: const EdgeInsets.only(left: 0),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => CustomBookImage(
-                  imageUrl:
-                      state.books[index].volumeInfo?.imageLinks?.thumbnail ??
-                          ''),
+                imageUrl:
+                    state.books[index].volumeInfo?.imageLinks?.thumbnail ?? '',
+              ),
               separatorBuilder: (context, index) => const SizedBox(width: 12),
               itemCount: state.books.length,
             ),

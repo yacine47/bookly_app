@@ -1,32 +1,63 @@
 import 'package:bookly_app/core/widgets/custom_button.dart';
+import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BookAction extends StatelessWidget {
-  const BookAction({super.key});
+  const BookAction({super.key, required this.bookModel});
+  final BookModel bookModel;
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
         Expanded(
             child: CustomButton(
+          bookModel: bookModel,
+          onPressed: () async {
+            await downloadBook();
+          },
           backgroundColor: Colors.white,
           titleColor: Colors.black,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(18), bottomLeft: Radius.circular(18)),
-          title: '19.99€',
+          title: 'Download',
         )),
         Expanded(
             child: CustomButton(
-          backgroundColor: Color(0xffEF8262),
+          bookModel: bookModel,
+          onPressed: () async {
+            await readBook();
+          },
+          backgroundColor: const Color(0xffEF8262),
           title: 'Free Preview',
           titleColor: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             bottomRight: Radius.circular(18),
             topRight: Radius.circular(18),
           ),
         )),
       ],
     );
+  }
+
+  Future<void> readBook() async {
+    final String urlString = bookModel.volumeInfo?.previewLink ?? '';
+    final Uri url = Uri.parse(urlString);
+    if (await launchUrl(url) && urlString.isEmpty) {
+      await launchUrl(url);
+    }
+  }
+
+  Future<void> downloadBook() async {
+    final bool bookisAvailable =
+        bookModel.accessInfo?.pdf?.isAvailable ?? false;
+    final String stringUrl = bookModel.accessInfo?.pdf?.acsTokenLink ?? '';
+    if (bookisAvailable) {
+      final Uri url = Uri.parse(stringUrl);
+      if (await launchUrl(url) && stringUrl.isEmpty) {
+        await launchUrl(url);
+      }
+    }
   }
 }
