@@ -1,3 +1,4 @@
+import 'package:bookly_app/core/functions/custom_snack_bar.dart';
 import 'package:bookly_app/core/widgets/custom_button.dart';
 import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class BookAction extends StatelessWidget {
             child: CustomButton(
           bookModel: bookModel,
           onPressed: () async {
-            await downloadBook();
+            await downloadBook(context);
           },
           backgroundColor: Colors.white,
           titleColor: Colors.black,
@@ -27,7 +28,7 @@ class BookAction extends StatelessWidget {
             child: CustomButton(
           bookModel: bookModel,
           onPressed: () async {
-            await readBook();
+            await readBook(context);
           },
           backgroundColor: const Color(0xffEF8262),
           title: 'Free Preview',
@@ -41,23 +42,27 @@ class BookAction extends StatelessWidget {
     );
   }
 
-  Future<void> readBook() async {
+  Future<void> readBook(context) async {
     final String urlString = bookModel.volumeInfo?.previewLink ?? '';
     final Uri url = Uri.parse(urlString);
     if (await launchUrl(url) && urlString.isEmpty) {
       await launchUrl(url);
+    } else {
+      customSnackBar(context, 'The book not found');
     }
   }
 
-  Future<void> downloadBook() async {
+  Future<void> downloadBook(context) async {
     final bool bookisAvailable =
         bookModel.accessInfo?.pdf?.isAvailable ?? false;
     final String stringUrl = bookModel.accessInfo?.pdf?.acsTokenLink ?? '';
-    if (bookisAvailable) {
+    if (!bookisAvailable) {
       final Uri url = Uri.parse(stringUrl);
       if (await launchUrl(url) && stringUrl.isEmpty) {
         await launchUrl(url);
       }
+    } else {
+      customSnackBar(context, 'The book not found');
     }
   }
 }
