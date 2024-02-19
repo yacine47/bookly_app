@@ -29,6 +29,15 @@ class _SearchViewBodyState extends State<SearchViewBody> {
                 CustomTextField(
                   onChanged: (value) {
                     searchBook = value ?? '';
+                    if (searchBook.isNotEmpty && value != null) {
+                      try {
+                        Future.delayed(const Duration(milliseconds: 500));
+                        BlocProvider.of<SearchCubit>(context)
+                            .fetchSearchResult(searchBook);
+                      } catch (e) {
+                        debugPrint(e.toString());
+                      }
+                    }
                   },
                   onPressed: () {
                     BlocProvider.of<SearchCubit>(context)

@@ -30,7 +30,7 @@ class SearchRepoImpl extends SearchRepo {
       if (e is DioException) {
         return left(ServiceFailure.fromDioError(e));
       }
-      return left(ServiceFailure(e.toString()));
+      return left(ServiceFailure('No Result'));
     }
   }
 }
