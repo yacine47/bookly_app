@@ -7,23 +7,27 @@ class CustomTextField extends StatelessWidget {
     super.key,
     this.maxLines = 1,
     required this.hint,
-    this.onSaved,
+    this.onChanged,
     // this.controller,
+
     this.keyboardType = TextInputType.text,
+    this.onPressed,
   });
   // final TextEditingController? controller;
   final int maxLines;
   final String hint;
-  final void Function(String?)? onSaved;
+  final void Function(String?)? onChanged;
   final TextInputType? keyboardType;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: onChanged,
       keyboardType: keyboardType,
       cursorColor: Colors.white,
       decoration: InputDecoration(
           suffixIcon: IconButton(
-            onPressed: () {},
+            onPressed: onPressed,
             icon: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Iconify(

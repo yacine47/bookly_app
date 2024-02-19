@@ -60,6 +60,8 @@ class BookAction extends StatelessWidget {
       final Uri url = Uri.parse(stringUrl);
       if (await launchUrl(url) && stringUrl.isEmpty) {
         await launchUrl(url);
+      } else {
+        customSnackBar(context, 'The book not found');
       }
     } else {
       customSnackBar(context, 'The book not found');
