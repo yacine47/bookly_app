@@ -28,20 +28,13 @@ class _SearchViewBodyState extends State<SearchViewBody> {
                 const SizedBox(height: 24),
                 CustomTextField(
                   onChanged: (value) {
-                    searchBook = value ?? '';
-                    if (searchBook.isNotEmpty && value != null) {
-                      try {
-                        Future.delayed(const Duration(milliseconds: 500));
-                        BlocProvider.of<SearchCubit>(context)
-                            .fetchSearchResult(searchBook);
-                      } catch (e) {
-                        debugPrint(e.toString());
-                      }
-                    }
+                    searchRealTime(value, context);
                   },
                   onPressed: () {
-                    BlocProvider.of<SearchCubit>(context)
-                        .fetchSearchResult(searchBook);
+                    if (searchBook.isNotEmpty) {
+                      BlocProvider.of<SearchCubit>(context)
+                          .fetchSearchResult(searchBook);
+                    }
                   },
                   hint: 'Search Book',
                 ),
@@ -57,6 +50,19 @@ class _SearchViewBodyState extends State<SearchViewBody> {
         )
       ],
     );
+  }
+
+  void searchRealTime(String? value, BuildContext context) {
+    searchBook = value ?? '';
+    if (searchBook.isNotEmpty && value != null) {
+      try {
+        Future.delayed(const Duration(milliseconds: 500));
+        BlocProvider.of<SearchCubit>(context)
+            .fetchSearchResult(searchBook);
+      } catch (e) {
+        debugPrint(e.toString());
+      }
+    }
   }
 }
 
